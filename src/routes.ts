@@ -3,6 +3,7 @@ import multerConfig from "./config/multer";
 import multer from "multer";
 import { uploadImageController } from "./useCases/Post/UploadImage";
 import { listAllPostsController } from "./useCases/Post/ListAllPosts";
+import { deletePostController } from "./useCases/Post/DeletePost";
 import { signUpController } from "./useCases/Auth/SignUp";
 import { signInController } from "./useCases/Auth/SignIn";
 import { protectRoute } from "./middlewares/auth";
@@ -21,12 +22,16 @@ router.get("/posts", protectRoute, async (_, res) => {
   return listAllPostsController.handle(res);
 });
 
-router.post("/signUp", (request, response) => {
-  return signUpController.handle(request, response);
+router.delete("/post/:filename", protectRoute, async (req, res) => {
+  return deletePostController.handle(req,res);
 });
 
-router.post("/signIn", (request, response) => {
-  return signInController.handle(request, response);
+router.post("/signUp", (req, res) => {
+  return signUpController.handle(req, res);
+});
+
+router.post("/signIn", (req, res) => {
+  return signInController.handle(req, res);
 });
 
 export { router };

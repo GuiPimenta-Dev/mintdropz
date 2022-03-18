@@ -19,7 +19,7 @@ const Post = new mongoose.Schema({
 
 Post.pre("save", function () {
   if (!this.url) {
-    this.url = `${process.env.MONGO_URI}/files/${this.filename}`;
+    this.url = `${process.env.APP_URL}/files/${this.filename}`;
   }
 });
 

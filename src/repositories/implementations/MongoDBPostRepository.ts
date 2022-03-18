@@ -18,4 +18,10 @@ export class MongoDbPostsRepository implements IPostsRepository {
 
     return posts;
   }
+
+  async delete(filename: string): Promise<void> {
+    const post = await this.post.findById(filename);
+
+    await post.remove();
+  }
 }
