@@ -1,6 +1,6 @@
 export interface IUploadImageDTO {
+  name: String;
+  size: String;
   filename: String;
-  originalname: String;
-  size: Number;
-  path: String;
+  url: String;
 }

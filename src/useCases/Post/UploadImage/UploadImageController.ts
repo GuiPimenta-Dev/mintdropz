@@ -3,9 +3,9 @@ import { UploadImageService } from "./UploadImageUseCase";
 
 export class UploadImageController {
   constructor(private uploadImageUseCase: UploadImageService) {}
-  async handle(req, res: Response): Promise<Response> {
+  async handle(req: Request, res: Response): Promise<Response> {
     try {
-      const result = await this.uploadImageUseCase.execute(req.files);
+      const result = await this.uploadImageUseCase.execute(req.file);
 
       return res.status(200).send(result);
     } catch (err) {

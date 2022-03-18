@@ -1,4 +1,4 @@
-const UserModel = require("../schemas/user");
+const UserModel = require("../models/user");
 
 module.exports = {
   loginUser: function (email, password, callback) {

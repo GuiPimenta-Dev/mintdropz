@@ -8,12 +8,15 @@
     "rootDir": "./src",
     "forceConsistentCasingInFileNames": true,
     "outDir": "out",
-    "baseUrl": ".",
+    "baseUrl": "src",
     "sourceMap": true,
     "paths": {
-      "@repositories/*": ["./src/repositories/implementations/*"],
-      "@auth/*": ["./src/useCases/Auth/*"],
-      "@schemas/*": ["./src/schemas/*"]
+      "@repositories/*": ["./repositories/*"],
+      "@implementations/*": ["./repositories/implementations/*"],
+      "@providers/*": ["./providers/implementations/*"],
+      "@auth/*": ["./useCases/Auth/*"],
+      "@upload/*": ["./useCases/Post/UploadImage/*"],
+      "@models/*": ["./models/*"]
     }
   },
   "include": ["src/**/*"]

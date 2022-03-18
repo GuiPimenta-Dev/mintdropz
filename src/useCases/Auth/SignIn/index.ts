@@ -1,7 +1,7 @@
 import { MongoDbUsersRepository } from "../../../repositories/implementations/MongoDBUsersRepository";
 import { SignInUseCase } from "./SignInUseCase";
 import { SignInController } from "./SignInController";
-import UserSchema from "../../../schemas/user";
+import UserSchema from "../../../models/user";
 
 const mongoDBUsersRepository = new MongoDbUsersRepository(UserSchema);
 

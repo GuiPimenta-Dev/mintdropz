@@ -1,7 +1,6 @@
-import { IUsersRepository } from "../../../repositories/IUsersRepository";
+import { IUsersRepository } from "@repositories/IUsersRepository";
 import { ISignInDTO } from "./SignInDTO";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 
 export class SignInUseCase {
   constructor(private usersRepository: IUsersRepository) {}
