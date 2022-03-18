@@ -1,16 +1,21 @@
 import { IUploadImageDTO } from "@upload/UploadImageDTO";
-import { IUploadImageRepository } from "../IPostRepository";
+import { IPostsRepository } from "../IPostRepository";
 
-export class MongoDbUploadRepository implements IUploadImageRepository {
-  private upload: any;
+export class MongoDbPostsRepository implements IPostsRepository {
+  private post: any;
 
   constructor(schema) {
-    this.upload = schema;
+    this.post = schema;
   }
 
   async create(dto: IUploadImageDTO): Promise<IUploadImageDTO> {
-    const upload = await this.upload.create(dto);
+    const post = await this.post.create(dto);
 
-    return upload;
+    return post;
+  }
+  async listAll(): Promise<IUploadImageDTO[]> {
+    const posts = await this.post.find();
+
+    return posts;
   }
 }

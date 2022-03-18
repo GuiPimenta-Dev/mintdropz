@@ -1,7 +1,8 @@
-import { response, Router } from "express";
+import { Router } from "express";
 import multerConfig from "./config/multer";
 import multer from "multer";
 import { uploadImageController } from "./useCases/Post/UploadImage";
+import { listAllPostsController } from "./useCases/Post/ListAllPosts";
 import { signUpController } from "./useCases/Auth/SignUp";
 import { signInController } from "./useCases/Auth/SignIn";
 import { protectRoute } from "./middlewares/auth";
@@ -15,6 +16,10 @@ router.post(
     return uploadImageController.handle(req, res);
   }
 );
+
+router.get("/posts", protectRoute, async (_, res) => {
+  return listAllPostsController.handle(res);
+});
 
 router.post("/signUp", (request, response) => {
   return signUpController.handle(request, response);

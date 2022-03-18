@@ -28,7 +28,7 @@ export class SignUpUseCase {
       body: "<p>Você já pode fazer login em nossa plataforma.</p>",
     });
 
-    const { name, email } = await this.usersRepository.save(dto);
+    const { name, email } = await this.usersRepository.create(dto);
 
     return { name, email };
   }

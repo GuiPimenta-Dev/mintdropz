@@ -13,7 +13,7 @@ export class MongoDbUsersRepository implements IUsersRepository {
     return user;
   }
 
-  async save(user: ISignUpDTO): Promise<ISignUpDTO> {
+  async create(user: ISignUpDTO): Promise<ISignUpDTO> {
     await this.users.create(user);
 
     return user;

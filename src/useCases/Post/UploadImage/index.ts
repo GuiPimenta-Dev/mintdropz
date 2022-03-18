@@ -1,11 +1,11 @@
 import { UploadImageController } from "./UploadImageController";
-import { UploadImageService } from "./UploadImageUseCase";
-import { MongoDbUploadRepository } from "../../../repositories/implementations/MongoDBPostRepository";
+import { UploadImageUseCase } from "./UploadImageUseCase";
+import { MongoDbPostsRepository } from "../../../repositories/implementations/MongoDBPostRepository";
 import UploadSchema from "../../../models/post";
 
-const mongoDbUploadRepository = new MongoDbUploadRepository(UploadSchema);
+const mongoDbUploadRepository = new MongoDbPostsRepository(UploadSchema);
 
-const uploadImageService = new UploadImageService(mongoDbUploadRepository);
+const uploadImageService = new UploadImageUseCase(mongoDbUploadRepository);
 
 const uploadImageController = new UploadImageController(uploadImageService);
 

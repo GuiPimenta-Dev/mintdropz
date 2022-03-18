@@ -1,6 +1,6 @@
-import { IUploadImageRepository } from "../../../repositories/IPostRepository";
-export class UploadImageService {
-  constructor(private uploadRepository: IUploadImageRepository) {}
+import { IPostsRepository } from "../../../repositories/IPostRepository";
+export class UploadImageUseCase {
+  constructor(private mongoDBPostsRepository: IPostsRepository) {}
 
   async execute(file) {
     if (!file) {
@@ -10,7 +10,7 @@ export class UploadImageService {
 
     const filename = file.key ? file.key : file.filename;
 
-    const upload = await this.uploadRepository.create({
+    const upload = await this.mongoDBPostsRepository.create({
       name,
       size,
       filename,

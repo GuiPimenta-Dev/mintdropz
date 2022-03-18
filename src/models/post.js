@@ -6,7 +6,7 @@ const { promisify } = require("util");
 
 const s3 = new aws.S3();
 
-const UploadSchema = new mongoose.Schema({
+const Post = new mongoose.Schema({
   name: String,
   size: Number,
   filename: String,
@@ -17,13 +17,13 @@ const UploadSchema = new mongoose.Schema({
   },
 });
 
-UploadSchema.pre("save", function () {
+Post.pre("save", function () {
   if (!this.url) {
     this.url = `${process.env.MONGO_URI}/files/${this.filename}`;
   }
 });
 
-UploadSchema.pre("remove", function () {
+Post.pre("remove", function () {
   if (process.env.STORAGE_TYPE === "s3") {
     return s3
       .deleteObject({
@@ -44,4 +44,4 @@ UploadSchema.pre("remove", function () {
   }
 });
 
-module.exports = mongoose.model("Upload", UploadSchema);
+module.exports = mongoose.model("Upload", Post);
