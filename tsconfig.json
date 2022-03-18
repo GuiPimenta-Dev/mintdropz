@@ -8,13 +8,13 @@
     "rootDir": "./src",
     "forceConsistentCasingInFileNames": true,
     "outDir": "out",
+    "baseUrl": ".",
     "sourceMap": true,
     "paths": {
-      "@controllers/*": ["./src/controllers/*"],
-      "@models/*": ["./src/models/*"],
-      "@views/*": ["./src/views/*"],
-      "@config/*": ["./src/config/*"]
+      "@repositories/*": ["./src/repositories/implementations/*"],
+      "@auth/*": ["./src/useCases/Auth/*"],
+      "@schemas/*": ["./src/schemas/*"]
     }
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*"]
 }
