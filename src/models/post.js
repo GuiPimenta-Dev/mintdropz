@@ -7,10 +7,12 @@ const { promisify } = require("util");
 const s3 = new aws.S3();
 
 const Post = new mongoose.Schema({
-  name: String,
-  size: Number,
+  title: String,
+  description: String,
   filename: String,
+  size: Number,
   url: String,
+  email: String,
   createdAt: {
     type: Date,
     default: Date.now,

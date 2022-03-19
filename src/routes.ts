@@ -1,20 +1,23 @@
 import { Router } from "express";
+import IDecodedRequest from "./interfaces/decodedRequest";
 import multerConfig from "./config/multer";
 import multer from "multer";
-import { uploadImageController } from "./useCases/Post/UploadImage";
+import { createPostController } from "./useCases/Post/CreatePost";
 import { listAllPostsController } from "./useCases/Post/ListAllPosts";
+import { listPostController } from "./useCases/Post/ListPost";
 import { deletePostController } from "./useCases/Post/DeletePost";
+import { updatePostController } from "./useCases/Post/UpdatePost";
 import { signUpController } from "./useCases/Auth/SignUp";
 import { signInController } from "./useCases/Auth/SignIn";
 import { protectRoute } from "./middlewares/auth";
 const router = Router();
 
 router.post(
-  "/upload",
+  "/posts",
   protectRoute,
   multer(multerConfig).single("file"),
-  (req, res) => {
-    return uploadImageController.handle(req, res);
+  (req: IDecodedRequest, res) => {
+    return createPostController.handle(req, res);
   }
 );
 
@@ -22,9 +25,22 @@ router.get("/posts", protectRoute, async (_, res) => {
   return listAllPostsController.handle(res);
 });
 
-router.delete("/post/:filename", protectRoute, async (req, res) => {
-  return deletePostController.handle(req,res);
+router.get("/posts/:id", protectRoute, async (req, res) => {
+  return listPostController.handle(req, res);
 });
+
+router.delete("/posts/:id", protectRoute, async (req: IDecodedRequest, res) => {
+  return deletePostController.handle(req, res);
+});
+
+router.put(
+  "/posts/:id",
+  protectRoute,
+  multer(multerConfig).single("file"),
+  async (req: IDecodedRequest, res) => {
+    return updatePostController.handle(req, res);
+  }
+);
 
 router.post("/signUp", (req, res) => {
   return signUpController.handle(req, res);

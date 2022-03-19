@@ -1,17 +1,21 @@
 import { Response } from "express";
-import { DeletePostUseCase } from "./DeletePostUseCase";
+import { UpdatePostUseCase } from "./UpdatePostUseCase";
 import IDecodedRequest from "../../../interfaces/decodedRequest";
 
-export class DeletePostController {
-  constructor(private deletePostUseCase: DeletePostUseCase) {}
+export class UpdatePostController {
+  constructor(private updatePostUseCase: UpdatePostUseCase) {}
   async handle(req: IDecodedRequest, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
       const { email } = req.decoded;
+      const result = await this.updatePostUseCase.execute(
+        id,
+        req.body,
+        req.file,
+        email
+      );
 
-      const result = await this.deletePostUseCase.execute(id, email);
-
-      return res.status(204).send(result);
+      return res.status(200).send(result);
     } catch (err) {
       return res.status(400).json({
         message: err.message || "Unexpected error.",

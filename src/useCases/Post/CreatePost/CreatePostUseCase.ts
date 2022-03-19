@@ -1,20 +1,24 @@
 import { IPostsRepository } from "../../../repositories/IPostRepository";
-export class UploadImageUseCase {
+export class CreatePostUseCase {
   constructor(private mongoDBPostsRepository: IPostsRepository) {}
 
-  async execute(file) {
+  async execute(file, body, email) {
     if (!file) {
       throw new Error("You need to upload a file.");
     }
-    const { originalname: name, size, location: url = "" } = file;
+    const { location: url = "", size } = file;
 
     const filename = file.key ? file.key : file.filename;
 
+    const { title, description } = body;
+
     const upload = await this.mongoDBPostsRepository.create({
-      name,
-      size,
+      title,
+      description,
       filename,
       url,
+      size,
+      email,
     });
     return upload;
   }

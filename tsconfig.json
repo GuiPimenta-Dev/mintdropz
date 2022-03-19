@@ -15,7 +15,7 @@
       "@implementations/*": ["./repositories/implementations/*"],
       "@providers/*": ["./providers/implementations/*"],
       "@auth/*": ["./useCases/Auth/*"],
-      "@upload/*": ["./useCases/Post/UploadImage/*"],
+      "@upload/*": ["./useCases/Post/CreatePost/*"],
       "@models/*": ["./models/*"]
     }
   },

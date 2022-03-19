@@ -1,8 +1,8 @@
 import { IPostsRepository } from "../../../repositories/IPostRepository";
-export class DeletePostUseCase {
+export class UpdatePostUseCase {
   constructor(private mongoDBPostsRepository: IPostsRepository) {}
 
-  async execute(id: String, email: String) {
+  async execute(id, body, file, email) {
     if (!id) {
       throw new Error("Post id is missing.");
     }
@@ -12,6 +12,15 @@ export class DeletePostUseCase {
     if (!isOwner) {
       throw new Error("You are not the owner of this post.");
     }
-    return await this.mongoDBPostsRepository.delete(id);
+
+    const { title, description } = body;
+
+    const { location: url = "" } = file;
+
+    const filename = file.key ? file.key : file.filename;
+
+    const dto = { id, title, description, url, filename };
+
+    return await this.mongoDBPostsRepository.update(dto);
   }
 }

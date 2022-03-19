@@ -18,7 +18,9 @@ export class SignInUseCase {
       throw new Error("Passwords dont match.");
     }
 
-    const token = jwt.sign(dto, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ email: dto.email }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     return { token };
   }
