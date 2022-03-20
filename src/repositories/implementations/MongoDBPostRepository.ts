@@ -22,7 +22,7 @@ export class MongoDbPostsRepository implements IPostsRepository {
   }
 
   async listAll(): Promise<ICreatePostDTO[]> {
-    const posts = await this.post.find();
+    const posts = await this.post.find().sort({ createdAt: -1 });
 
     return posts;
   }

@@ -39,11 +39,7 @@ Post.pre("remove", function () {
       .catch((response) => {
         console.log(response.status);
       });
-  } else {
-    return promisify(fs.unlink)(
-      path.resolve(__dirname, "..", "..", "tmp", "uploads", this.filename)
-    );
   }
 });
 
-module.exports = mongoose.model("Upload", Post);
+module.exports = mongoose.model("Post", Post);

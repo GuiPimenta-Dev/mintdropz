@@ -15,7 +15,7 @@ export class SignUpUseCase {
       throw new Error("User already exists.");
     }
 
-    await this.mailProvider.sendMail({
+    this.mailProvider.sendMail({
       to: {
         name: dto.name,
         email: dto.email,

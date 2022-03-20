@@ -9,7 +9,7 @@ export class SignInUseCase {
     const user = await this.usersRepository.findByEmail(dto.email);
 
     if (!user) {
-      throw new Error("User dont exists.");
+      throw new Error("User does not exists.");
     }
 
     const isMatch = await this.usersRepository.comparePassword(dto);

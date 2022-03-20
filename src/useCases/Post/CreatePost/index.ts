@@ -5,8 +5,8 @@ import UploadSchema from "../../../models/post";
 
 const mongoDbUploadRepository = new MongoDbPostsRepository(UploadSchema);
 
-const createPostService = new CreatePostUseCase(mongoDbUploadRepository);
+const createPostUseCase = new CreatePostUseCase(mongoDbUploadRepository);
 
-const createPostController = new CreatePostController(createPostService);
+const createPostController = new CreatePostController(createPostUseCase);
 
-export { createPostController, createPostService };
+export { createPostController, createPostUseCase };

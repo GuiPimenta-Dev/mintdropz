@@ -19,5 +19,5 @@
       "@models/*": ["./models/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "__tests__"]
 }
