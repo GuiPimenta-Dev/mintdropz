@@ -3,3 +3,4 @@ helpers
 out
 .env
 setEnvVars.js
+.vscode
