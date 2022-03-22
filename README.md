@@ -70,146 +70,146 @@ The API is also following the Domain-driven-design (DDD) approach where each str
 
 <br>
 
+### All the images are being stored at Amazon S3 and the aplication is running in a AWS EC2 instance.
+
+    BASE URL: http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334
+
 # Available Endpoints
 
-Click the button below to download my Insomnia requests.
-
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=MintDropz&uri=https%3A%2F%2Fraw.githubusercontent.com%2FGuiPimenta-Dev%2Fmintdropz%2Fmaster%2Fexport.json%3Ftoken%3DGHSAT0AAAAAABPQTDCOHTIQKEHZ7ZQYDXDIYRZW4DQ)
-
-## Manufacturer
+## Authentication
 
 <br>
 
-### Create a manufacturer.
+### Sign up a new User.
 
-    The parameter name is mandatory.
+    There is already a user in the database with the credentials:
+
+    name: MintDropz
+    email: mintdropz@gmail.com
+    password: mintdropz
+
+    Feel free to sign up new users.
 
     curl --request POST \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/manufacturer \
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/signUp \
     --header 'Content-Type: application/json' \
     --data '{
-        "name": "First Manufacturer"
+        "name": "User",
+        "email": "user@test.com",
+        "password": "Password"
     }'
 
-<br>
+    When the user signs up, a welcome email is sent.
 
-### List all manufacturers
+    MailTrap provider is being used as email testing tool (https://mailtrap.io).
 
-    curl --request GET \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/manufacturer \
-    --header 'Content-Type: application/json'
-
-<br>
-
-### Update a manufacturer
-
-    The parameter name is mandatory.
-
-    curl --request PUT \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/manufacturer/{:id} \
-    --header 'Content-Type: application/json' \
-    --data '{
-        "name": "New Manufacture`s name"
-    }'
+<p align="center">
+  <img src="uploads/2022-03-22-10-19-22.png" alt="drawing" height="200"/>
+</p>
 
 <br>
 
-### Delete a manufacturer
+### Sign in a user
 
-    curl --request DELETE \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/manufacturer/{:id} \
-    --header 'Content-Type: application/json'
-
-<br>
-
-### List a manufacturer`s equipments
-
-    curl --request GET \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/manufacturer/equipments/{:id} \
-    --header 'Content-Type: application/json'
-
-## Equipment
-
-<br>
-
-### Create an equipment
-
-    For this request, the model and the manufacturerId are mandatory, but you can create an equipment that don`t belongs to any manufacturer.
+    The response is a JWT token that needs to be passed in the next requests.
 
     curl --request POST \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/equipment \
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/signIn \
     --header 'Content-Type: application/json' \
     --data '{
-        "model":"First Equipment",
-        "manufacturerId": {:manufacturerId} || null
+        "email": "mintdropz@gmail.com",
+        "password": "mintdropz"
     }'
 
 <br>
 
-### List all equipments
-
-    curl --request GET \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/equipment \
-    --header 'Content-Type: application/json'
+## Posts
 
 <br>
 
-### Update an equipment
+### Create a post
 
-    You can create a relationship between an existing equipment and an existing manufacturer, or remove/update an existing one.
+    curl --request POST \
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/posts \
+    --header 'Authorization: {:token}' \
+    --header 'Content-Type: multipart/form-data; boundary=---011000010111000001101001' \
+    --form 'file={:file}' \
+    --form title="Some Title" \
+    --form description="Some Description"
 
-    Model and serialNumber are optionals and manufacturerId is mandatory.
+<br>
+
+### List all posts
+
+    curl --request GET \
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/posts \
+    --header 'Authorization: {:token}'
+
+<br>
+
+### List one post
+
+    curl --request GET \
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/posts/{:id} \
+    --header 'Authorization: {:token}'
+
+<br>
+
+### Update a post
 
     curl --request PUT \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/equipment/{:id} \
-    --header 'Content-Type: application/json' \
-    --data '{
-        "model": "New Model",
-        "serialNumber": "New Serial Number",
-        "manufacturerId": {:manufacturerId} || null
-    }'
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/posts/{:id} \
+    --header 'Authorization: {:token}' \
+    --header 'Content-Type: multipart/form-data; boundary=---011000010111000001101001' \
+    --form 'file={:file}' \
+    --form title="New Title" \
+    --form description="New Description"
 
 <br>
 
-### Delete an equipment
+### Delete a post
 
     curl --request DELETE \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/equipment/{:id} \
-    --header 'Content-Type: application/json'
+    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3334/posts/{:id} \
+    --header 'Authorization: {:token}'
 
 <br>
 
-### List an equipment owner
+Click the button below to download the Insomnia file with the available endpoints.
 
-    curl --request GET \
-    --url http://ec2-54-207-192-146.sa-east-1.compute.amazonaws.com:3333/equipment/manufacturer/{:id} \
-    --header 'Content-Type: application/json'
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=MintDropz&uri=https%3A%2F%2Fraw.githubusercontent.com%2FGuiPimenta-Dev%2Fmintdropz%2Fmaster%2Fexport.json)
 
-<br>
+All requests are already chained to the sign in route.
 
 # Tests
 
 ## All endpoints mentioned above were tested with the jest library to ensure they are working properly.
 
 <p align="center">
-  <img src="storage/2022-03-14-13-26-54.png" alt="drawing" height="500"/>
+  <img src="uploads/2022-03-22-10-12-56.png" alt="drawing" height="300"/>
 </p>
 
-Project coverage is at 100% as seen in the image below.
+## The coverage is at 100% as seen in the image below.
 
-<img src="storage/2022-03-14-13-33-42.png" alt="drawing" />
-
-<br>
-
-# BitBucket Pipelines
-
-There is a video in the project root showing the CI/CD process working correctly.
-
-    storage/pipeline-ci:cd.mov
+<img src="uploads/2022-03-22-10-14-47.png" alt="drawing" />
 
 <br>
 
-I intentionally set the pipeline to trigger on the development branch only. Please make sure you are on the correct branch when testing the deployment process.
+# Minterestz
+
+## I created a small web application called Minterestz (mix of mintdropz and pinterest) to consume the API endpoints.
+
+<br>
+
+Login to the application with an existent user (use the /signUp route on Insomnia to create new users).
+
+<p align="center">
+  <img src="uploads/2022-03-22-10-56-08.png" alt="drawing" height="400"/>
+</p>
+
+    https://minterestz.netlify.app/
+
+<br>
 
 # Thanks for reading!
 
