@@ -21,11 +21,11 @@ export class SignUpUseCase {
         email: dto.email,
       },
       from: {
-        name: "Equipe do Meu App",
-        email: "equipe@meuapp.com",
+        name: "Minterestz team",
+        email: "minterestz@test.com",
       },
-      subject: "Seja bem-vindo à plataforma",
-      body: "<p>Você já pode fazer login em nossa plataforma.</p>",
+      subject: "Welcome to the platform",
+      body: "<p>You can already login to our platform.</p>",
     });
 
     const { name, email } = await this.usersRepository.create(dto);
