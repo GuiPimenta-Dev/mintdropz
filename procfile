@@ -1,1 +1,1 @@
-web: pm2 start yarn --interpreter bash --name mintdropz -- start
+web: node src/server.js
