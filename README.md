@@ -179,7 +179,7 @@ Click the button below to download the Insomnia file with the available endpoint
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=MintDropz&uri=https%3A%2F%2Fraw.githubusercontent.com%2FGuiPimenta-Dev%2Fmintdropz%2Fmaster%2Fexport.json)
 
-All requests are already chained to the sign in route.
+All requests are already chained to the login route.
 
 # Tests
 
@@ -207,7 +207,53 @@ Login to the application with an existent user (use the /signUp route on Insomni
   <img src="uploads/2022-03-22-10-56-08.png" alt="drawing" height="400"/>
 </p>
 
+<br>
+
+## Once logged in, you can upload a file to the database.
+
+<br>
+
+<p align="center">
+  <img src="uploads/2022-03-22-12-26-00.png" alt="drawing" height="300"/>
+</p>
+
+<br>
+
+## All images uploaded by users will appear here.
+
+<br>
+<p align="center">
+  <img src="uploads/2022-03-22-12-27-56.png" alt="drawing" height="200"/>
+</p>
+<br>
+
+## You can hover the cards to see it's title and description. If you are the card's owner, you can delete it.
+
+<br>
+<p align="center">
+  <img src="uploads/2022-03-22-12-30-27.png" alt="drawing" height="200"/>
+</p>
+
+<br>
+
+## The source code and the link for this project can be found in the links below:
+
+    https://github.com/GuiPimenta-Dev/minterestz
+
     https://minterestz.netlify.app/
+
+<br>
+
+# Technologys used
+
+- Node JS
+- React
+- Typescript
+- MongoDB
+- Jest
+- AWS S3
+- AWS EC2
+- Netlify
 
 <br>
 
